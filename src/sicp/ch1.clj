@@ -96,11 +96,17 @@ false
   (cubert-iter 1.0 x))
 
 (defn cubert-iter [guess x]
-  (if (good-enough? guess x)
+  (if (cube-good-enough? guess x)
     guess
-    (cubert-iter (cube-improve guess x)
-                 x)))
+    (cubert-iter (cube-improve guess x) x)))
 
 (defn cube-improve [guess x]
-  (/ (+ (/ x (square guess)) (* guess 2))
+  (/ (+ (/ x (square guess))
+        (* guess 2))
      3))
+
+(defn cube-good-enough? [guess x]
+  (< (abs (- (cube guess) x)) 0.001))
+
+(defn cube [x]
+  (* x (* x x)))
