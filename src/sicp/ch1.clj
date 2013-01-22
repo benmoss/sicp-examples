@@ -130,11 +130,11 @@ false
   (loop [product 1, counter 1, max-count n]
     (if (> counter max-count)
       product
-      (recur (* counter product)
+       (recur (* counter product)
              (inc counter)
              max-count))))
 
-(factorial-iter 5)
+ (factorial-iter 5)
 
 ; 1.9
 ; recursive process
@@ -301,3 +301,34 @@ false
 (defn k [n]
   "5n^2"
   (* 5 n n))
+
+; 1.11
+(defn f [n]
+  (if (< n 3)
+    n
+    (+ (f (dec n))
+       (* 2 (f (- n 2)))
+       (* 3 (f (- n 3))))))
+
+(f 5)
+
+(f-iter 5)
+
+(defn f-iter [n]
+  (loop [a 2 b 1 c 0 n n]
+    (if (< n 3)
+      a
+      (recur (+ a (* 2 b) (* 3 c))
+             a
+             b
+             (- n 1)))))
+
+; 1.12
+(defn pascal [row col]
+  (if (or (= col 0) (= row col))
+    1
+    (+ (pascal (- row 1) col)
+       (pascal (- row 1) (- col 1)))))
+
+; 1.13
+; fuck this
