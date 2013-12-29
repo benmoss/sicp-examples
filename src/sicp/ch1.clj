@@ -1,5 +1,4 @@
-(ns sicp.ch1
-  (:require clojure.core))
+(ns sicp.ch1)
 
 (defn square [x] (* x x))
 
@@ -10,7 +9,7 @@
   (sum-of-squares (+ a 1) (* a 2)))
 
 (defn abs [x]
-  (cond 
+  (cond
     (> x 0) x
     (= x 0) 0
     (< x 0) (- x)))
@@ -62,20 +61,20 @@ false
 ; if using applicative-order, the procedure would return false
 ; if using normal-order, the procedure would be caught in an infinite loop of trying to evaluate p
 
+(defn good-enough? [guess x]
+  (< (abs (- (square guess) x)) 0.001))
+
+(defn average [x y]
+  (/ (+ x y) 2))
+
+(defn improve [guess x]
+  (average guess (/ x guess)))
+
 (defn sqrt-iter [guess x]
   (if (good-enough? guess x)
     guess
     (sqrt-iter (improve guess x)
                x)))
-
-(defn improve [guess x]
-  (average guess (/ x guess)))
-
-(defn average [x y]
-  (/ (+ x y) 2))
-
-(defn good-enough? [guess x]
-  (< (abs (- (square guess) x)) 0.001))
 
 (defn sqrt [x]
   (sqrt-iter 1.0 x))
@@ -93,6 +92,7 @@ false
 ; with very large numbers, rounding results in us seeing same answer for different numbers
 
 ; 1.8
+(declare cubert-iter cube-good-enough? cube-improve cube)
 (defn cubert [x]
   (cubert-iter 1.0 x))
 
@@ -312,7 +312,6 @@ false
 
 (f 5)
 
-(f-iter 5)
 
 (defn f-iter [n]
   (loop [a 2 b 1 c 0 n n]
@@ -322,6 +321,8 @@ false
              a
              b
              (- n 1)))))
+
+(f-iter 5)
 
 ; 1.12
 (defn pascal [row col]
